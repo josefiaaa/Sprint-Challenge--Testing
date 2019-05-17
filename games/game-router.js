@@ -2,27 +2,17 @@ const router = require('express').Router();
 
 const db = require('../games/games-model');
 
-// router.get('/', (req,res) => {
-//     db
-//         .find()
-//         .then(db => {
-//          res.status(200).json(db);
-//         })
-//         .catch(err => {
-//             res.status(500).json({ error: "The games could not be retrieved." });
-//         })
-// });
-
-router.get("/", async (req, res) => {
-    try {
-      const games = await db.find();
-      if (games) {
-        res.status(200).json(games);
-      }
-    } catch (error) {
-      res.status(500).json({ message: `Games could not be found ${error}.` });
-    }
+router.get('/', (req,res) => {
+    db
+        .find()
+        .then(db => {
+         res.status(200).json(db);
+        })
+        .catch(err => {
+            res.status(500).json({ error: "The games could not be retrieved." });
+        })
 });
+
 
 router.post('/', (req, res) => {
     const { title, genre } = req.body;
